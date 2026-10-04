@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Neon contribution city</title>
+  <desc id="desc">A static isometric cyberpunk city visualization representing contribution activity. Taller buildings represent more activity.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080d25"/><stop offset="1" stop-color="#1b1238"/></linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#18234b"/><stop offset="1" stop-color="#090d20"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <rect width="1200" height="420" rx="18" fill="url(#sky)"/>
+  <g opacity=".25" stroke="#5368b8"><path d="M0 330L600 90l600 240"/><path d="M0 370L600 130l600 240"/><path d="M120 420L600 225l480 195"/></g>
+  <path d="M0 330L600 90l600 240-600 90z" fill="url(#road)" stroke="#00f6ff" stroke-opacity=".45"/>
+  <path d="M600 90v300M0 330l600 60 600-60" fill="none" stroke="#ff3bd4" stroke-opacity=".35"/>
+  <g stroke="#00f6ff" stroke-width="2" stroke-linejoin="round">
+    <path d="M145 300v-76l55-25 55 25v76z" fill="#151d50"/><path d="M145 224l55 28 55-28" fill="#26377a"/>
+    <path d="M290 316v-132l65-30 65 30v132z" fill="#121a46"/><path d="M290 184l65 32 65-32" fill="#273a83"/>
+    <path d="M460 327v-195l75-35 75 35v195z" fill="#17194b"/><path d="M460 132l75 37 75-37" fill="#30439a"/>
+    <path d="M655 325v-150l68-31 68 31v150z" fill="#181746"/><path d="M655 175l68 34 68-34" fill="#64327f" stroke="#ff3bd4"/>
+    <path d="M825 312v-94l52-24 52 24v94z" fill="#151a45"/><path d="M825 218l52 26 52-26" fill="#4e2b75" stroke="#ff3bd4"/>
+    <path d="M980 298v-55l42-20 42 20v55z" fill="#171b43"/><path d="M980 243l42 21 42-21" fill="#274378"/>
+  </g>
+  <g fill="#75f7dc">
+    <path d="M165 249h12v11h-12zM205 270h12v11h-12zM310 220h13v15h-13zM350 250h13v15h-13zM485 180h14v18h-14zM530 220h14v18h-14zM680 214h14v15h-14zM735 244h14v15h-14zM846 246h12v12h-12zM1000 260h11v10h-11z"/>
+  </g>
+  <g fill="#ff3bd4" opacity=".9"><circle cx="202" cy="338" r="3"/><circle cx="600" cy="350" r="4"/><circle cx="900" cy="330" r="3"/></g>
+  <text x="54" y="54" fill="#75f7dc" font-family="monospace" font-size="17">CONTRIBUTION_CITY // STATIC_RENDER</text>
+  <text x="54" y="82" fill="#aebfff" font-family="monospace" font-size="14">activity becomes architecture · update the scene as your graph evolves</text>
+</svg>

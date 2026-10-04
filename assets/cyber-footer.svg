@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 90" role="img" aria-label="End of profile decoration">
+  <defs><linearGradient id="line"><stop stop-color="#00f6ff"/><stop offset=".5" stop-color="#75f7dc"/><stop offset="1" stop-color="#ff3bd4"/></linearGradient></defs>
+  <rect width="1200" height="90" rx="16" fill="#090d20"/>
+  <path d="M50 45H1150" stroke="url(#line)" stroke-width="2"/>
+  <path d="M50 45l22-12v24zM1150 45l-22-12v24z" fill="#75f7dc"/>
+  <text x="600" y="53" text-anchor="middle" fill="#aebfff" font-family="monospace" font-size="15">SYSTEM STATUS: BUILD · LEARN · SHIP · REPEAT</text>
+</svg>
