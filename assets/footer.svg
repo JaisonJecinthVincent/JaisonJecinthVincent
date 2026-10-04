@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="160" viewBox="0 0 880 160" role="img" aria-labelledby="t160 d160">
+  <title id="t160">Footer</title>
+  <desc id="d160">Exit message</desc>
+  <rect width="100%" height="100%" fill="#05070d"/>
+    <text x="40" y="80" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="14">$ exit</text>
+  <text x="40" y="110" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">connection to github closed. // EOF</text>
+</svg>
