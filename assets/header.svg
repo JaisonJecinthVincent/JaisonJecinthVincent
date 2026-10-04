@@ -2,7 +2,7 @@
   <title id="t240">Header</title>
   <desc id="d240">Terminal header</desc>
   <rect width="100%" height="100%" fill="#05070d"/>
-    <text x="40" y="80" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="14">$ whoami</text>
-  <text x="40" y="120" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700" class="type">jaison@netrunner</text>
+    <text x="40" y="80" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="14">$ whoami</text>
+  <text x="40" y="120" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700" class="type">jaison@netrunner</text>
   <rect x="40" y="140" width="8" height="20" fill="#00d9ff" class="blink"/>
 </svg>

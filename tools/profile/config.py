@@ -15,7 +15,7 @@ PALETTE = {
 
 MONO_FONT_STACK = (
     'ui-monospace, SFMono-Regular, Menlo, Consolas, '
-    '"DejaVu Sans Mono", monospace'
+    'DejaVu Sans Mono, monospace'
 )
 
 class SliceSpec:

@@ -2,8 +2,8 @@
   <title id="t240">About</title>
   <desc id="d240">About panel</desc>
   <rect width="100%" height="100%" fill="#05070d"/>
-    <text x="40" y="60" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">// about</text>
-  <text x="40" y="100" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="14">Final-year CSE student at College of Engineering Guindy, Anna University.</text>
-  <text x="40" y="130" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="14">I build AI agents, developer tooling, and browser-based hardware emulators.</text>
-  <text x="40" y="160" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="14">Currently learning: agentic AI, compilers, and how much of a browser you can bend.</text>
+    <text x="40" y="60" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">// about</text>
+  <text x="40" y="100" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="14">Final-year CSE student at College of Engineering Guindy, Anna University.</text>
+  <text x="40" y="130" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="14">I build AI agents, developer tooling, and browser-based hardware emulators.</text>
+  <text x="40" y="160" fill="#d3e9ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="14">Currently learning: agentic AI, compilers, and how much of a browser you can bend.</text>
 </svg>

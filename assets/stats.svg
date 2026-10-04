@@ -2,16 +2,16 @@
   <title id="t240">Stats</title>
   <desc id="d240">Telemetry panel</desc>
   <rect width="100%" height="100%" fill="#05070d"/>
-    <text x="40" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="40" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">contributions_ytd</text>
-  <text x="300" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="300" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">contributions_all</text>
-  <text x="560" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="560" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">streak_current</text>
-  <text x="40" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="40" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">streak_longest</text>
-  <text x="300" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="300" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">repos</text>
-  <text x="560" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="28" font-weight="700">0</text>
-  <text x="560" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace" font-size="12">member_since</text>
+    <text x="40" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="40" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">contributions_ytd</text>
+  <text x="300" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="300" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">contributions_all</text>
+  <text x="560" y="90" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="560" y="112" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">streak_current</text>
+  <text x="40" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="40" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">streak_longest</text>
+  <text x="300" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="300" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">repos</text>
+  <text x="560" y="150" fill="#2f81ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="28" font-weight="700">0</text>
+  <text x="560" y="172" fill="#6d8fb5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, DejaVu Sans Mono, monospace" font-size="12">member_since</text>
 </svg>
