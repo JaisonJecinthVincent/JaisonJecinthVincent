@@ -1,8 +1,8 @@
 """Updates the dynamic parts of README.md from data/*.json.
 
-- the latest-articles block between <!-- writing:start --> and <!-- writing:end -->
-  (links + alt text; the images themselves come from render.py)
 - the alt text of the stats image, so screen readers get today's numbers
+- the alt text of the contribution city image
+- optionally the latest-articles block between <!-- writing:start --> and <!-- writing:end --> if present
 
 Everything else in the README is left exactly as it is.
 """
@@ -16,6 +16,22 @@ import sys
 HERE = pathlib.Path(__file__).resolve().parent
 README = HERE.parent.parent / "README.md"
 DATA = HERE / "data"
+
+
+def replace_zone(s: str, tag: str, new_block: str) -> str:
+    pattern = re.compile(
+        r"<!-- " + re.escape(tag) + r":start -->.*?<!-- " + re.escape(tag) + r":end -->",
+        re.DOTALL,
+    )
+    new_s, n = pattern.subn(
+        f"<!-- {tag}:start -->\n{new_block}\n<!-- {tag}:end -->",
+        s,
+    )
+    if n == 0:
+        raise RuntimeError(f"No match for marker {tag}:start/end")
+    if n > 1:
+        raise RuntimeError(f"Multiple matches for marker {tag}:start/end")
+    return new_s
 
 
 def writing_block(articles):
@@ -61,25 +77,23 @@ def city_alt(calendar):
 
 
 def main():
-    stats = json.loads((DATA / "stats.json").read_text())
-    articles = json.loads((DATA / "articles.json").read_text())
-    s = README.read_text()
+    stats = json.loads((DATA / "stats.json").read_text(encoding="utf-8"))
+    s = README.read_text(encoding="utf-8")
 
-    s, n = re.subn(r"<!-- writing:start -->.*?<!-- writing:end -->", lambda _: writing_block(articles), s, flags=re.S)
-    if n != 1:
-        sys.exit("error: README needs exactly one <!-- writing:start --> … <!-- writing:end --> block")
+    articles_file = DATA / "articles.json"
+    if articles_file.exists() and "<!-- writing:start -->" in s:
+        articles = json.loads(articles_file.read_text(encoding="utf-8"))
+        s = re.sub(r"<!-- writing:start -->.*?<!-- writing:end -->", writing_block(articles), s, flags=re.S)
 
-    s, n = re.subn(r'(<img src="\./assets/stats\.svg"[^>]*?alt=")[^"]*(")',
-                   lambda m: m.group(1) + stats_alt(stats) + m.group(2), s)
-    if n != 1:
-        sys.exit("error: README needs exactly one stats.svg image with an alt attribute")
+    s = re.sub(r'(<img src="\./assets/stats\.svg"[^>]*?alt=")[^"]*(")',
+               lambda m: m.group(1) + stats_alt(stats) + m.group(2), s)
 
     cal_file = DATA / "calendar.json"
-    if cal_file.exists():   # optional section: only touched when the README has the city image
-        s = re.sub(r'(<img src="\./assets/contribution-city\.svg"[^>]*?alt=")[^"]*(")',
-                   lambda mm: mm.group(1) + city_alt(json.loads(cal_file.read_text())) + mm.group(2), s)
+    if cal_file.exists():
+        s = re.sub(r'(<img src="\./assets/(?:contribution-city|city)\.svg"[^>]*?alt=")[^"]*(")',
+                   lambda mm: mm.group(1) + city_alt(json.loads(cal_file.read_text(encoding="utf-8"))) + mm.group(2), s)
 
-    README.write_text(s)
+    README.write_text(s, encoding="utf-8")
     print("README updated")
 
 

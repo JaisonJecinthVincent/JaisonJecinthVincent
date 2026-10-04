@@ -1,4 +1,4 @@
-﻿"""Renders the profile README's SVG slices into assets/.
+"""Renders the profile README's SVG slices into assets/.
 
 Every slice is part of one continuous console frame. Run fetch.py first to refresh
 data/*.json; this script only reads those files and draws.
@@ -123,11 +123,14 @@ def up40(v):
 
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 def build_header():
-    bar_left, bar_right = "SYS://PILOTRONICA // NODE:GIORGI", "ONLINE Â· ALL SYSTEMS NOMINAL"
+    bar_left, bar_right = "SYS://CONSOLE // NODE:JAISON", "ONLINE · ALL SYSTEMS NOMINAL"
     name = "JAISON JECINTH VINCENT"
-    lines = ["software engineer Â· engineering manager", "10 years of C# / .NET, back-end at heart",
-             "building open-source tools under "]
-    text = bar_left + bar_right + name + "$ whoami>>" + "".join(lines) + "PILOTRONICA"
+    lines = [
+        "Software Engineer",
+        "Aspiring Systems Engineer",
+        "Learning Testing, Agentic AI and Open Source",
+    ]
+    text = bar_left + bar_right + name + "$ whoami>>" + "".join(lines)
     h = 360
     css = f"""@keyframes type{{from{{width:0}}}}
 @keyframes flicker{{0%{{opacity:0}}10%{{opacity:1}}14%{{opacity:.2}}22%{{opacity:1}}30%{{opacity:.4}}40%,100%{{opacity:1}}}}
@@ -143,7 +146,7 @@ def build_header():
     dotx = FR - 20 - len(bar_right) * 8.2 - 16
     rows = [f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[0])}</text>',
             f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[1])}</text>',
-            f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[2])}<tspan class="cy" font-weight="700">PILOTRONICA</tspan></text>']
+            f'<text class="fg" x="{X}" y="{{y}}"><tspan class="cy">&gt;&gt;</tspan> {e(lines[2])}</text>']
     desc_lines, _ = stagger(rows, 218, 24, delay0=1.75, step=0.25)
     body = f'''<rect x="{FL}" y="{M}" width="{FR-FL}" height="34" fill="{CYAN}" fill-opacity=".08"/>
 <line x1="{FL}" y1="{M+34}" x2="{FR}" y2="{M+34}" stroke="{CYAN}" stroke-opacity=".5"/>
@@ -166,12 +169,11 @@ def build_header():
 </g>
 <rect x="{FL}" y="{M+35}" width="{FR-FL}" height="{h-M-35}" fill="url(#scan)"/>'''
     return slice_svg(h, body, title="JAISON JECINTH VINCENT",
-                     desc="Software engineer and engineering manager. 10 years of C# and .NET, back-end at heart. "
-                          "Building open-source tools under Pilotronica.",
+                     desc="Software Engineer · Aspiring Systems Engineer · Learning Testing, Agentic AI and Open Source",
                      text=text, top=True, css=css, defs=defs, weights=(400, 700, 800))
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─────────────────────────────── footer ───────────────────────────────
 def build_footer():
     h = 80
     text = "$ exit connection to JaisonJecinthVincent closed. // EOF"
@@ -359,11 +361,11 @@ def build_stats(d):
 
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 STACK = [
-    ("languages", ["C#", "Java", "TypeScript", "JavaScript", "Python"]),
-    ("frameworks", [".NET", "Node.js", "FastAPI"]),
-    ("databases", ["PostgreSQL", "MS SQL", "MySQL", "Redis", "MongoDB"]),
-    ("cloud", ["AWS", "Azure"]),
-    ("front-end", ["React", "Next.js", "Three.js", "Tailwind CSS"]),
+    ("languages", ["Python", "TypeScript", "JavaScript", "C++", "Java"]),
+    ("ai / ml", ["Agentic AI", "PyTorch", "Federated Learning", "LLMs"]),
+    ("frameworks", ["React", "Node.js", "Express", "FastAPI"]),
+    ("tools / dev", ["Git", "Docker", "GitHub Actions", "VS Code APIs"]),
+    ("systems / web", ["MQTT", "Tailwind CSS", "HTML5", "REST APIs"]),
 ]
 
 
@@ -547,6 +549,12 @@ def _levels(counts):
     return [q(.25), q(.5), q(.75)]
 
 
+def height_for_count(n, peak):
+    if n == 0 or peak <= 0:
+        return 0
+    return 8 + (CITY_HMAX - 8) * math.sqrt(n / peak)
+
+
 def build_city(calendar, updated):
     days = [(datetime.date.fromisoformat(d), n) for d, n in calendar]
     counts = [n for _, n in days]
@@ -570,7 +578,7 @@ def build_city(calendar, updated):
         if n == 0:
             shapes.append(f'<path d="M{_p(*T)}L{_p(*R)}L{_p(*B)}L{_p(*L)}Z" fill="#161b22" stroke="#0d1117" stroke-width=".6"/>')
             continue
-        h = 8 + (CITY_HMAX - 8) * math.sqrt(n / peak)
+        h = height_for_count(n, peak)
         level = sum(n > t for t in lv)
         Tu, Ru, Bu, Lu = [(x, y - h) for x, y in (T, R, B, L)]
         shapes.append(f'<path d="M{_p(*L)}L{_p(*B)}L{_p(*Bu)}L{_p(*Lu)}Z" fill="#1a2440"/>'
@@ -645,10 +653,21 @@ def build_city(calendar, updated):
                      css=css, defs=defs)
 
 
+def render_asset(path: str, content: str) -> bool:
+    p = pathlib.Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        if p.exists() and p.read_text(encoding="utf-8") == content:
+            return False
+    except Exception:
+        pass
+    p.write_text(content, encoding="utf-8")
+    return True
+
+
 def write(rel, svg):
     path = OUT / rel
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(svg, encoding="utf-8")
+    render_asset(str(path), svg)
 
 
 def main():
@@ -659,24 +678,16 @@ def main():
     ap.add_argument("--out", type=pathlib.Path, default=OUT, help="folder to write the SVGs into")
     args = ap.parse_args()
     OUT = args.out
-    stats = json.load(open(args.data / "stats.json"))
-    articles = json.load(open(args.data / "articles.json"))
-    stars = stats.get("repo_stars", {})
+    stats = json.load(open(args.data / "stats.json", encoding="utf-8"))
     write("header.svg", build_header())
-    write("links.svg", build_links_head())
-    for k, (key, *_) in enumerate(LINKS):
-        write(f"links/{'dev' if key == 'devdotto' else key}.svg", build_link_button(k))
     write("stats.svg", build_stats(stats))
     if (args.data / "calendar.json").exists():
-        write("contribution-city.svg", build_city(json.load(open(args.data / "calendar.json")), stats["updated"]))
-    write("projects.svg", build_projects_head())
-    for i, p in enumerate(PROJECTS):
-        write(f"card-{p['slug']}.svg", build_card(p, "L" if i % 2 == 0 else "R", 0.3 + i * 0.12, stars))
-    write("stack.svg", build_stack())
-    write("writing.svg", build_writing_head())
-    for i, a in enumerate(articles[:5]):
-        write(f"writing/post-{i+1}.svg", build_article_row(a, i))
-    write("writing/all-articles.svg", build_writing_more())
+        city_svg = build_city(json.load(open(args.data / "calendar.json", encoding="utf-8")), stats["updated"])
+        write("contribution-city.svg", city_svg)
+        write("city.svg", city_svg)
+    stack_svg = build_stack()
+    write("stack.svg", stack_svg)
+    write("matrix.svg", stack_svg)
     write("footer.svg", build_footer())
     print("rendered", len(list(OUT.rglob("*.svg"))), "SVGs into", OUT)
 

@@ -1,4 +1,4 @@
-from tools.profile.slices.city import height_for_count, render
+from tools.profile.render import height_for_count, build_city
 
 def test_city_height_calculation():
     assert height_for_count(0, 43) == 0

@@ -26,6 +26,10 @@ UA = "JaisonJecinthVincent-profile-updater"
 
 
 # ─────────────────────────────── helpers ───────────────────────────────
+def should_commit_changes(old, new):
+    return old != new
+
+
 def http_json(url, *, headers=None, body=None, timeout=30):
     req = urllib.request.Request(url, data=None if body is None else json.dumps(body).encode(),
                                  headers={"User-Agent": UA, "Accept": "application/json", **(headers or {})})
