@@ -629,6 +629,27 @@ def build_city(calendar, updated):
             f'{sum(1 for n in counts if n)} active days']
     info_svg = "".join(f'<text x="{FR-36}" y="{300 + i*20}" text-anchor="end" class="dim" style="font-size:12px">{t}</text>'
                        for i, t in enumerate(info) if t)
+    peak_marker = ""
+    if busiest_d and busiest_n:
+        idx = (busiest_d - start).days
+        w = idx // 7
+        dow = (busiest_d.weekday() + 1) % 7
+        pcx = CITY_OX + (w - dow) * CITY_TW / 2
+        pcy = CITY_OY + (w + dow) * CITY_TH / 2
+        ph = height_for_count(busiest_n, peak)
+        roof_y = pcy - ph
+        badge_w = 114
+        bx = pcx - badge_w / 2
+        by = roof_y - 24
+        peak_marker = (
+            f'<g class="ln" style="animation-delay:.5s">'
+            f'<line x1="{pcx:.1f}" y1="{roof_y:.1f}" x2="{pcx:.1f}" y2="{roof_y - 10:.1f}" stroke="{CYAN}" stroke-width="1.2" stroke-dasharray="2,2"/>'
+            f'<circle cx="{pcx:.1f}" cy="{roof_y:.1f}" r="2" fill="{CYAN}"/>'
+            f'<rect x="{bx:.1f}" y="{by:.1f}" width="{badge_w}" height="16" rx="3" fill="#03040a" stroke="{CYAN}" stroke-width="1" fill-opacity=".95"/>'
+            f'<text x="{pcx:.1f}" y="{by + 11.5:.1f}" text-anchor="middle" fill="{CYAN}" font-weight="700" style="font-size:9.5px">'
+            f'PEAK: {busiest_n} ({busiest_d:%b} {busiest_d.day})</text>'
+            f'</g>'
+        )
     legend = "".join(f'<rect x="{X + 52 + i*16}" y="{642}" width="11" height="11" fill="{c}"/>'
                      for i, c in enumerate(["#161b22"] + ROOFS))
     body = heading(44, "contribution-city", "// 03") + f'''
@@ -640,6 +661,7 @@ def build_city(calendar, updated):
 <g class="plane"><g transform="translate(0 132)"><rect x="0" y="0" width="14" height="2" rx="1" fill="#484f58"/><circle class="bl" cx="0" cy="1" r="1.6" fill="#ff7b72"/><circle class="bl" cx="14" cy="1" r="1.6" fill="#f0f6fc" style="animation-delay:.7s"/></g></g>
 {info_svg}
 {"".join(shapes)}
+{peak_marker}
 <text x="{X}" y="{652}" class="dim" style="font-size:11px">quiet</text>{legend}<text x="{X + 52 + 5*16 + 6}" y="{652}" class="dim" style="font-size:11px">skyscraper</text>'''
     css = f""".bldg{{cursor:pointer;transition:filter .15s ease}}.bldg:hover{{filter:url(#g)}}.tile{{cursor:pointer}}.tile:hover path{{fill:#1c2333;stroke:#00d9ff;stroke-width:1}}@keyframes tw{{0%,100%{{opacity:.9}}50%{{opacity:.15}}}}
 @keyframes fl{{0%,40%,100%{{opacity:1}}45%,60%{{opacity:.1}}}}

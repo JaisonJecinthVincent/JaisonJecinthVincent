@@ -76,6 +76,18 @@ def city_alt(calendar):
     return html.escape(text + ".", quote=True)
 
 
+def city_title(calendar):
+    total = sum(n for _, n in calendar)
+    busiest = max(calendar, key=lambda t: t[1]) if calendar else None
+    active = sum(1 for _, n in calendar if n > 0)
+    tip = f"Contribution City: {total:,} contributions (last 365 days) | {active} active days"
+    if busiest and busiest[1]:
+        d = datetime.date.fromisoformat(busiest[0])
+        tip += f" | Busiest day: {d:%b %d} ({busiest[1]} contributions)"
+    tip += " | Click to open interactive view!"
+    return html.escape(tip, quote=True)
+
+
 def main():
     stats = json.loads((DATA / "stats.json").read_text(encoding="utf-8"))
     s = README.read_text(encoding="utf-8")
@@ -90,8 +102,11 @@ def main():
 
     cal_file = DATA / "calendar.json"
     if cal_file.exists():
+        cal_data = json.loads(cal_file.read_text(encoding="utf-8"))
         s = re.sub(r'(<img src="\./assets/(?:contribution-city|city)\.svg"[^>]*?alt=")[^"]*(")',
-                   lambda mm: mm.group(1) + city_alt(json.loads(cal_file.read_text(encoding="utf-8"))) + mm.group(2), s)
+                   lambda mm: mm.group(1) + city_alt(cal_data) + mm.group(2), s)
+        s = re.sub(r'(title=")[^"]*("(?:[^>]*?src="\./assets/(?:contribution-city|city)\.svg"|[^>]*?>\s*<img src="\./assets/(?:contribution-city|city)\.svg"))',
+                   lambda mm: mm.group(1) + city_title(cal_data) + mm.group(2), s)
 
     README.write_text(s, encoding="utf-8")
     print("README updated")
