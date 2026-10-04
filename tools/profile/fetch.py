@@ -224,17 +224,7 @@ def main():
     else:
         warn("No PROFILE_TOKEN or GITHUB_TOKEN set, skipping GitHub")
 
-    try:
-        dev, latest = fetch_dev(os.environ.get("DEV_API_KEY"))
-        prev = stats.get("dev") or {}
-        # keep a previously known value rather than dropping a tile when the key-only calls fail
-        stats["dev"] = {k: (v if v is not None else prev.get(k)) for k, v in dev.items()}
-        if latest:
-            articles = latest
-        ok = True
-        print("dev: ok" + ("" if os.environ.get("DEV_API_KEY") else " (public only, no DEV_API_KEY)"))
-    except Exception as ex:  # noqa: BLE001
-        warn(f"DEV fetch failed, keeping previous values: {ex}")
+
 
     if not ok:
         print("error: every source failed, nothing updated", file=sys.stderr)

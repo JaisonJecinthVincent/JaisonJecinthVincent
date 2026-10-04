@@ -338,19 +338,11 @@ def build_stats(d):
 {"".join(legend)}
 </g>''')
     # row 3 â€” DEV Community (tiles without data are left out; the row hides if all are missing)
-    dv = d.get("dev") or {}
+    dv = {}
     t3 = [(lab, dv.get(k)) for lab, k in (("ARTICLES", "articles"), ("REACTIONS", "reactions"), ("COMMENTS", "comments"),
                                           ("VIEWS", "views"), ("DEV FOLLOWERS", "followers"))]
     t3 = [(lab, v) for lab, v in t3 if v is not None]
     fy = ry + rh + 30
-    if t3:
-        dy = ry + rh + 34
-        parts.append(f'<g class="ln" style="animation-delay:.8s"><text x="{X}" y="{dy}" class="dim"><tspan class="gr">$</tspan> dev stats --user JaisonJecinthVincent</text></g>')
-        n = len(t3)
-        dw = (FR - 36 - X - (n - 1) * 12) / n
-        for i, (lab, val) in enumerate(t3):
-            parts.append(tile(X + i * (dw + 12), dy + 16, dw, 76, lab, fmt(val), "", .9 + i * .06))
-        fy = dy + 16 + 76 + 30
     parts.append(f'<text x="{FR-36}" y="{fy}" text-anchor="end" fill="#484f58" style="font-size:11px">// last sync {d["updated"]}</text>')
     h = up40(fy + 16)
     text = "".join(str(x) for x in ["~/stats// 02$ gh stats --user JaisonJecinthVincent dev stats", "".join(p for p in parts)])
