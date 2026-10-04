@@ -20,7 +20,7 @@ FONT_DIR = HERE / "fonts"
 CYAN, MAGENTA, GREEN = "#00d9ff", "#ff2bd6", "#3fb950"
 W, M = 880, 16            # slice width, transparent side margin (room for the glow)
 FL, FR = M, W - M         # frame left / right
-X = 52                    # text left edge
+X = 52                    # --- text left edge ---
 e = html.escape
 
 
@@ -121,7 +121,7 @@ def up40(v):
     return int(math.ceil(v / 40) * 40)
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- header  ---
 def build_header():
     bar_left, bar_right = "SYS://CONSOLE // NODE:JAISON", "ONLINE · ALL SYSTEMS NOMINAL"
     name = "JAISON JECINTH VINCENT"
@@ -173,7 +173,7 @@ def build_header():
                      text=text, top=True, css=css, defs=defs, weights=(400, 700, 800))
 
 
-# ─────────────────────────────── footer ───────────────────────────────
+# --- footer  ---
 def build_footer():
     h = 80
     text = "$ exit connection to JaisonJecinthVincent closed. // EOF"
@@ -183,7 +183,7 @@ def build_footer():
 
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ projects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- projects  ---
 HW = W // 2   # half-slice width (440, a multiple of 40 so the grid stays aligned)
 
 
@@ -254,16 +254,16 @@ def build_card(p, side, delay, stars=None):
 </g>'''
     text = p["name"] + p["tag"] + p["desc"] + p["stack"] + str(p["stars"])
     return half_slice(CARD_H, side, body, title=p["name"],
-                      desc=f'{p["name"]}: {p["desc"]} Built with {p["stack"].replace(" Â· ", ", ")}. {p["stars"]} stars.', text=text)
+                      desc=f'{p["name"]}: {p["desc"]} Built with {p["stack"].replace(" · ", ", ")}. {p["stars"]} stars.', text=text)
 
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- stats  ---
 AMBER, VIOLET = "#e3b341", "#bc8cff"
 
 
 def fmt(n):
-    return "â€”" if n is None else f"{n:,}"
+    return "-" if n is None else f"{n:,}"
 
 
 def tile(x, y, w, h, label, value, sub, delay, pending=False):
@@ -285,21 +285,21 @@ def build_stats(d):
     parts = []
     parts.append(heading(44, "stats", "// 02"))
     parts.append(f'<g class="ln" style="animation-delay:.15s"><text x="{X}" y="96" class="dim"><tspan class="gr">$</tspan> gh stats --user JaisonJecinthVincent</text></g>')
-    # row 1 â€” big tiles
+    # row 1 - big tiles
     tw, gap, ty, th = 182, 16, 118, 92
     t1 = [("TOTAL STARS", fmt(d["stars"]), f"across {d.get('repo_count', 'all')} repos" if d.get("repo_count") else "across all repos"),
           (f"CONTRIBUTIONS {d['year']}", fmt(d["contributions_year"]), f"{fmt(d['contributions_all'])} all time")
-          if "contributions_year" in d else   # older data files only have commit counts
+          if "contributions_year" in d else   # --- older data files only have commit counts ---
           (f"COMMITS {d['year']}", fmt(d["commits_year"]), f"{fmt(d['commits_all'])} all time"),
           ("PULL REQUESTS", fmt(d["prs"]), f"{fmt(d['prs_merged'])} merged"),
           ("CURRENT STREAK", f"{d['streak_current']}d", f"longest: {d['streak_longest']} days")]
     for i, (lab, val, sub) in enumerate(t1):
         parts.append(tile(X + i * (tw + gap), ty, tw, th, lab, val, sub, .25 + i * .08))
-    # row 2 â€” neofetch list + languages
+    # row 2 - neofetch list + languages
     ry, rh = ty + th + 16, 150
     lw = 300
     kv = [("followers", fmt(d["followers"])), ("forks", fmt(d["forks"])),
-          ("member since", f"{since:%b %Y} ({yrs}y)"), ("hackathon wins", f"{d['hackathon_wins']} â˜…")]
+          ("member since", f"{since:%b %Y} ({yrs}y)"), ("hackathon wins", f"{d['hackathon_wins']} wins")]
     rows = "\n".join(
         f'<text x="{X+16}" y="{ry+38+i*28}" xml:space="preserve"><tspan class="cy">{e(k)}</tspan><tspan class="dim">{"." * (16 - len(k))}</tspan> <tspan class="fg">{e(v)}</tspan></text>'
         for i, (k, v) in enumerate(kv))
@@ -339,7 +339,7 @@ def build_stats(d):
 {"".join(segs)}
 {"".join(legend)}
 </g>''')
-    # row 3 â€” DEV Community (tiles without data are left out; the row hides if all are missing)
+    # row 3 - DEV Community (tiles without data are left out; the row hides if all are missing)
     dv = {}
     t3 = [(lab, dv.get(k)) for lab, k in (("ARTICLES", "articles"), ("REACTIONS", "reactions"), ("COMMENTS", "comments"),
                                           ("VIEWS", "views"), ("DEV FOLLOWERS", "followers"))]
@@ -348,7 +348,7 @@ def build_stats(d):
     parts.append(f'<text x="{FR-36}" y="{fy}" text-anchor="end" fill="#484f58" style="font-size:11px">// last sync {d["updated"]}</text>')
     h = up40(fy + 16)
     text = "".join(str(x) for x in ["~/stats// 02$ gh stats --user JaisonJecinthVincent dev stats", "".join(p for p in parts)])
-    text = re.sub(r"<[^>]+>", "", text) + "0123456789,â€”%.â˜…()d"
+    text = re.sub(r"<[^>]+>", "", text) + "0123456789,-%.()d"
     activity = (f"{d['contributions_year']} contributions in {d['year']}, {d['contributions_all']} all time"
                 if "contributions_year" in d else f"{d['commits_year']} commits in {d['year']}, {d['commits_all']} all time")
     desc = (f"GitHub stats: {d['stars']} total stars; {activity}; "
@@ -359,7 +359,7 @@ def build_stats(d):
     return slice_svg(h, "\n".join(parts), title="Stats", desc=desc, text=html.unescape(text))
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- stack  ---
 STACK = [
     ("languages", ["Python", "TypeScript", "JavaScript", "C++", "Java"]),
     ("ai / ml", ["Agentic AI", "PyTorch", "Federated Learning", "LLMs"]),
@@ -377,7 +377,7 @@ def build_stack():
     for r, (cat, items) in enumerate(STACK):
         parts.append(f'<g class="ln" style="animation-delay:{.25 + r*.1:.2f}s">')
         parts.append(f'<text x="{X}" y="{y+20}" class="dim" style="font-size:13px">{e(cat)}</text>')
-        parts.append(f'<text x="{X+104}" y="{y+20}" class="cy" style="font-size:13px">â€º</text>')
+        parts.append(f'<text x="{X+104}" y="{y+20}" class="cy" style="font-size:13px">&gt;</text>')
         x = X + 124
         for it in items:
             w = len(it) * cw + 26
@@ -388,12 +388,12 @@ def build_stack():
         parts.append("</g>")
         y += rowh
     h = up40(y + 10)
-    text = "~/stack// 05$ scan --loadout --top-levelâ€º" + "".join(c + "".join(i) for c, i in STACK)
+    text = "~/stack// 05$ scan --loadout --top-level>" + "".join(c + "".join(i) for c, i in STACK) + "".join(c + "".join(i) for c, i in STACK)
     desc = "Tech stack. " + " ".join(f"{c}: {', '.join(i)}." for c, i in STACK)
     return slice_svg(h, "\n".join(parts), title="Tech stack", desc=desc, text=text)
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ writing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- writing  ---
 HEART = "M8 14.2 6.9 13.2C3 9.7.5 7.4.5 4.6.5 2.3 2.3.5 4.6.5c1.3 0 2.5.6 3.4 1.6C8.9 1.1 10.1.5 11.4.5c2.3 0 4.1 1.8 4.1 4.1 0 2.8-2.5 5.1-6.4 8.6z"
 BUBBLE = "M1.5 1.5h13v9h-7l-3.5 3v-3h-2.5z"
 
@@ -409,11 +409,11 @@ def build_article_row(a, i):
     date = a["published_at"][:10]
     title = a["title"]
     maxc = 58
-    shown = title if len(title) <= maxc else title[:maxc - 1].rstrip(" .,:;") + "â€¦"
+    shown = title if len(title) <= maxc else title[:maxc - 3].rstrip(" .,:;") + "..."
     tx = X + 112
     rx = FR - 36
     rc, cc = str(a["reactions"]), str(a["comments"])
-    # right block:  â™¥ 169   â–­ 218   â†—
+    # --- right block ---
     ax = rx - 10
     cx_num = ax - 18
     cx_icon = cx_num - 3 * 7.8 - 22       # fixed columns (room for 3 digits) so rows line up
@@ -422,7 +422,7 @@ def build_article_row(a, i):
     body = f'''<g class="ln" style="animation-delay:{.2 + i*.08:.2f}s">
 <rect x="{X-10}" y="4" width="{rx - X + 20}" height="32" fill="{CYAN}" fill-opacity="{'.04' if i % 2 == 0 else '0'}"/>
 <text x="{X}" y="25" class="dim" style="font-size:13px">{date}</text>
-<text x="{X+94}" y="25" class="cy" style="font-size:13px">â€º</text>
+<text x="{X+94}" y="25" class="cy" style="font-size:13px">&gt;</text>
 <text x="{tx}" y="25" class="fg" style="font-size:14px">{e(shown)}</text>
 <path transform="translate({rx_icon:.1f} 13) scale(.8)" d="{HEART}" fill="{MAGENTA}"/>
 <text x="{rx_num:.1f}" y="25" text-anchor="end" class="dim" style="font-size:13px">{rc}</text>
@@ -430,7 +430,7 @@ def build_article_row(a, i):
 <text x="{cx_num:.1f}" y="25" text-anchor="end" class="dim" style="font-size:13px">{cc}</text>
 <path d="M{ax-6} 25l8-8M{ax-4} 17h6v6" fill="none" stroke="{CYAN}" stroke-width="1.5"/>
 </g>'''
-    text = date + "â€º" + shown + rc + cc
+    text = date + ">" + shown + rc + cc
     return slice_svg(40, body, title=title,
                      desc=f"{title}. Published {date}. {rc} reactions, {cc} comments.", text=text)
 
@@ -444,7 +444,7 @@ def build_writing_more():
                      text=">> read all articles on DEV Community")
 
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- links  ---
 LINKS = [
     ("devdotto", "DEV", "@JaisonJecinthVincent", "https://dev.to/JaisonJecinthVincent"),
     ("linkedin", "LinkedIn", "in/giorgikobaidze", "https://www.linkedin.com/in/giorgikobaidze/"),
@@ -453,8 +453,8 @@ LINKS = [
     ("discord", "Discord", "say hi", "https://discord.com/users/571315867426488330"),
 ]
 ICONS = json.load(open(HERE / "icons.json"))
-SEG = W // len(LINKS)     # 176 px per button slice
-BTN_W, BTN_GAP = 124, 39  # buttons line up with the text column (x = 52 â€¦ 828)
+SEG = W // len(LINKS)     # --- px per button slice ---
+BTN_W, BTN_GAP = 124, 39  # buttons line up with the text column (x = 52 .. 828)
 
 
 def icon_markup(key, x, y, size=18):
@@ -514,12 +514,12 @@ def build_link_button(k):
 </svg>
 '''
 
-# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ contribution city â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# --- contribution city  ---
 
 CITY_TW, CITY_TH = 25, 12.5                  # iso tile width / height
 CITY_OX, CITY_OY = 152.5, 262                # grid origin inside the 880-wide slice
 CITY_HMAX = 118                              # tallest building, px
-ROOFS = ["#0c2d6b", "#1554c0", "#2f81f7", "#1fd5ff"]   # navy â†’ electric blue, matching the neon console
+ROOFS = ["#0c2d6b", "#1554c0", "#2f81f7", "#1fd5ff"]   # navy -> electric blue, matching the neon console
 WIN_ON, WIN_ON_SIDE, WIN_OFF = "#7df9ff", "#4cc9f0", "#111827"
 
 
@@ -566,24 +566,28 @@ def build_city(calendar, updated):
     cells = []
     for d, n in days:
         idx = (d - start).days
-        cells.append((idx // 7, (d.weekday() + 1) % 7, n))      # week column, Sunday = 0
+        cells.append((idx // 7, (d.weekday() + 1) % 7, n, d))      # week column, Sunday = 0, date
     cells.sort(key=lambda c: (c[0] + c[1], c[0]))                 # back to front
 
     shapes, flick = [], 0
-    for w, dow, n in cells:
+    for w, dow, n, d in cells:
         cx = CITY_OX + (w - dow) * CITY_TW / 2
         cy = CITY_OY + (w + dow) * CITY_TH / 2
         L, R = (cx - CITY_TW / 2, cy), (cx + CITY_TW / 2, cy)
         T, B = (cx, cy - CITY_TH / 2), (cx, cy + CITY_TH / 2)
+        date_str = d.strftime("%b %d, %Y")
+        tip = f"{date_str}: {n} contribution{'s' if n != 1 else ''}" if n > 0 else f"{date_str}: no contributions"
         if n == 0:
-            shapes.append(f'<path d="M{_p(*T)}L{_p(*R)}L{_p(*B)}L{_p(*L)}Z" fill="#161b22" stroke="#0d1117" stroke-width=".6"/>')
+            shapes.append(f'<g class="tile"><title>{tip}</title><path d="M{_p(*T)}L{_p(*R)}L{_p(*B)}L{_p(*L)}Z" fill="#161b22" stroke="#0d1117" stroke-width=".6"/></g>')
             continue
         h = height_for_count(n, peak)
         level = sum(n > t for t in lv)
         Tu, Ru, Bu, Lu = [(x, y - h) for x, y in (T, R, B, L)]
-        shapes.append(f'<path d="M{_p(*L)}L{_p(*B)}L{_p(*Bu)}L{_p(*Lu)}Z" fill="#1a2440"/>'
-                      f'<path d="M{_p(*B)}L{_p(*R)}L{_p(*Ru)}L{_p(*Bu)}Z" fill="#111831"/>'
-                      f'<path d="M{_p(*Tu)}L{_p(*Ru)}L{_p(*Bu)}L{_p(*Lu)}Z" fill="{ROOFS[level]}"/>')
+        b_parts = [
+            f'<path d="M{_p(*L)}L{_p(*B)}L{_p(*Bu)}L{_p(*Lu)}Z" fill="#1a2440"/>',
+            f'<path d="M{_p(*B)}L{_p(*R)}L{_p(*Ru)}L{_p(*Bu)}Z" fill="#111831"/>',
+            f'<path d="M{_p(*Tu)}L{_p(*Ru)}L{_p(*Bu)}L{_p(*Lu)}Z" fill="{ROOFS[level]}"/>',
+        ]
         on, side, off, fl = [], [], [], []
         for face, (a, b) in (("l", (L, B)), ("r", (B, R))):
             for r in range(int((h - 6) // 7)):
@@ -602,26 +606,26 @@ def build_city(calendar, updated):
                     else:
                         (on if face == "l" else side).append(seg)
         if off:
-            shapes.append(f'<path d="{"".join(off)}" fill="{WIN_OFF}"/>')
+            b_parts.append(f'<path d="{"".join(off)}" fill="{WIN_OFF}"/>')
         if on:
-            shapes.append(f'<path d="{"".join(on)}" fill="{WIN_ON}"/>')
+            b_parts.append(f'<path d="{"".join(on)}" fill="{WIN_ON}"/>')
         if side:
-            shapes.append(f'<path d="{"".join(side)}" fill="{WIN_ON_SIDE}"/>')
+            b_parts.append(f'<path d="{"".join(side)}" fill="{WIN_ON_SIDE}"/>')
         for seg, face in fl:
             flick += 1
-            shapes.append(f'<path class="f{flick % 3}" d="{seg}" fill="{WIN_ON if face == "l" else WIN_ON_SIDE}"/>')
+            b_parts.append(f'<path class="f{flick % 3}" d="{seg}" fill="{WIN_ON if face == "l" else WIN_ON_SIDE}"/>')
+        shapes.append(f'<g class="bldg"><title>{tip}</title>{"".join(b_parts)}</g>')
 
-    # night sky in the empty top-right corner: stars, moon, a plane crossing
     stars = []
     for i in range(46):
         x, y = 470 + next(rnd) * 350, 118 + next(rnd) * 150
-        if x > 700 and y < 215:           # keep the moon clear
+        if x > 700 and y < 215:           # --- keep the moon clear ---
             continue
         cls = f' class="s{i % 3}"' if i % 3 == 0 else ""
         stars.append(f'<circle{cls} cx="{x:.1f}" cy="{y:.1f}" r="{(.6, .8, 1.1)[i % 3]}" fill="#c9d1d9" opacity="{.35 + next(rnd) * .5:.2f}"/>')
     busiest_d, busiest_n = max(days, key=lambda t: t[1]) if days else (None, 0)
-    info = [f'<tspan class="cy" font-weight="700">{total:,}</tspan> contributions Â· last 365 days',
-            f'busiest day <tspan class="fg">{busiest_d:%b} {busiest_d.day}</tspan> Â· {busiest_n}' if busiest_n else "",
+    info = [f'<tspan class="cy" font-weight="700">{total:,}</tspan> contributions (last 365 days)',
+            f'busiest day <tspan class="fg">{busiest_d:%b} {busiest_d.day}</tspan> ({busiest_n} contributions)' if busiest_n else "",
             f'{sum(1 for n in counts if n)} active days']
     info_svg = "".join(f'<text x="{FR-36}" y="{300 + i*20}" text-anchor="end" class="dim" style="font-size:12px">{t}</text>'
                        for i, t in enumerate(info) if t)
@@ -637,7 +641,7 @@ def build_city(calendar, updated):
 {info_svg}
 {"".join(shapes)}
 <text x="{X}" y="{652}" class="dim" style="font-size:11px">quiet</text>{legend}<text x="{X + 52 + 5*16 + 6}" y="{652}" class="dim" style="font-size:11px">skyscraper</text>'''
-    css = f"""@keyframes tw{{0%,100%{{opacity:.9}}50%{{opacity:.15}}}}
+    css = f""".bldg{{cursor:pointer;transition:filter .15s ease}}.bldg:hover{{filter:url(#g)}}.tile{{cursor:pointer}}.tile:hover path{{fill:#1c2333;stroke:#00d9ff;stroke-width:1}}@keyframes tw{{0%,100%{{opacity:.9}}50%{{opacity:.15}}}}
 @keyframes fl{{0%,40%,100%{{opacity:1}}45%,60%{{opacity:.1}}}}
 @keyframes blink{{0%,90%,100%{{opacity:0}}93%{{opacity:1}}}}
 @keyframes fly{{from{{transform:translate({FL - 40}px,0)}}to{{transform:translate({FR + 40}px,-30px)}}}}
